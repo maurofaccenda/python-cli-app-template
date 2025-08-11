@@ -13,7 +13,8 @@ help:
 	@echo "  security     - Run security checks with bandit"
 	@echo "  check-all    - Run all quality checks"
 	@echo "  clean        - Clean build artifacts"
-	@echo "  build        - Build the package"
+	@echo "  build        - Build the package with uv"
+	@echo "  build-install - Build and install the package"
 	@echo "  install-app  - Install the CLI app in development mode"
 
 # Install production dependencies
@@ -69,7 +70,11 @@ clean:
 
 # Build the package
 build:
-	uv run python -m build
+	uv build
+
+# Build and install the package
+build-install:
+	uv build && uv pip install dist/*.whl
 
 # Install pre-commit hooks
 install-hooks:

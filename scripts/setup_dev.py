@@ -115,6 +115,8 @@ def main():
     print("   - make format        # Format code")
     print("   - make lint          # Run linting")
     print("   - make check-all     # Run all quality checks")
+    print("   - uv build           # Build the package")
+    print("   - uv run cli-app     # Run the CLI app")
 
 
 if __name__ == "__main__":

@@ -9,9 +9,10 @@ A professional Python CLI application template with best practices, built using 
 - ⚙️ **Configuration Management** - Pydantic-based config with environment variable support
 - 🎯 **Enhanced Click Parameters** - Advanced parameter validation, types, and environment variable integration
 - 🧪 **Comprehensive Testing** - Full test suite with pytest and mocking
-- 📦 **UV Integration** - Fast dependency management with uv
+- 📦 **UV Integration** - Fast dependency management and building with uv
 - 🎨 **Code Quality** - Pre-configured with Ruff, mypy, and pre-commit hooks
 - 📊 **Coverage Reports** - Built-in test coverage reporting
+- 📋 **Modern Packaging** - PEP 517/518 compliant with pyproject.toml
 
 ## Quick Start
 
@@ -92,14 +93,27 @@ python-cli-app-template/
 │   ├── conftest.py         # Pytest configuration and fixtures
 │   ├── test_config.py      # Configuration module tests
 │   └── test_api_client.py  # API client tests
-├── pyproject.toml          # Project configuration and dependencies
+├── pyproject.toml          # Project configuration and dependencies (UV build backend)
 ├── README.md               # This file
 ├── .gitignore             # Git ignore patterns
 ├── .pre-commit-config.yaml # Pre-commit hooks configuration
-└── Makefile               # Development tasks
+├── Makefile               # Development tasks (UV-based)
+├── config.example.toml    # Example configuration file
+├── examples/              # Usage examples
+└── scripts/               # Development utilities
 ```
 
 ## Development
+
+### Dependency Management
+
+This project uses **UV** for dependency management with **pyproject.toml** as the single source of truth for all dependencies. No `requirements.txt` file is needed.
+
+**Key benefits:**
+- 🎯 **Single source of truth** - All dependencies defined in `pyproject.toml`
+- 🚀 **Fast resolution** - UV's Rust-based dependency resolver
+- 🔧 **Modern standards** - PEP 517/518 compliant
+- 📦 **Development groups** - Separate dev dependencies with `uv sync --group dev`
 
 ### Setting up the development environment
 
@@ -138,6 +152,19 @@ uv run ruff format cli_app/ tests/
 
 # Type checking with mypy
 uv run mypy cli_app/
+```
+
+### Building and packaging
+
+```bash
+# Build the package
+uv build
+
+# Build and install
+uv build && uv pip install dist/*.whl
+
+# Development build (editable install)
+uv pip install -e .
 ```
 
 ### Pre-commit hooks
